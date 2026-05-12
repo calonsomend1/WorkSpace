@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import prisma from '@/lib/prisma'
 
-// GET — obtiene todos los mensajes de un grupo
+// GET — obtiene todos los mensajes de un grupo, o solo los posteriores a 'since'
 export async function GET(request) {
   const session = await getServerSession()
   if (!session?.user?.email) {
@@ -11,13 +11,19 @@ export async function GET(request) {
 
   const { searchParams } = new URL(request.url)
   const groupId = searchParams.get('groupId')
+  const since = searchParams.get('since')
 
   if (!groupId) {
     return NextResponse.json({ error: 'groupId es obligatorio' }, { status: 400 })
   }
 
+  const where = { groupId }
+  if (since) {
+    where.createdAt = { gt: new Date(since) }
+  }
+
   const messages = await prisma.message.findMany({
-    where: { groupId },
+    where,
     include: { user: true },
     orderBy: { createdAt: 'asc' },
   })

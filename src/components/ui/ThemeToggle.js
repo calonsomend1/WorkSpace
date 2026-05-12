@@ -2,6 +2,7 @@
 
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
+import { Sun, Moon } from 'lucide-react'
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -25,7 +26,7 @@ export default function ThemeToggle() {
       }}
       title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
     >
-      {theme === 'dark' ? '☀️' : '🌙'}
+      {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
     </button>
   )
 }

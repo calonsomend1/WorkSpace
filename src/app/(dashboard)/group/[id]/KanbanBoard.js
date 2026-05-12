@@ -207,8 +207,8 @@ export default function KanbanBoard({ tasks, groupId, currentUserId, members }) 
                     ))}
                     <button
                       onClick={() => handleDeleteTask(task.id)}
-                      className="text-xs text-red-400 hover:text-red-300 px-2 py-1 rounded-lg transition-colors ml-auto"
-                      style={{ backgroundColor: 'var(--card)' }}
+                      className="text-xs px-2 py-1 rounded-lg transition-colors ml-auto hover:opacity-80"
+                      style={{ color: 'var(--danger)', backgroundColor: 'var(--card)' }}
                     >
                       Eliminar
                     </button>

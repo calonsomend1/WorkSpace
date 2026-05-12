@@ -1,12 +1,12 @@
 'use client'
 
 import Link from 'next/link'
+import { Columns3, MessagesSquare, UsersRound } from 'lucide-react'
 import ThemeToggle from '@/components/ui/ThemeToggle'
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
-
       {/* Navbar */}
       <nav className="flex items-center justify-between px-8 py-5 border-b" style={{ borderColor: 'var(--border)' }}>
         <span className="text-xl font-bold" style={{ color: 'var(--foreground)' }}>
@@ -69,17 +69,17 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
           {[
             {
-              icon: '📋',
+              icon: Columns3,
               title: 'Tablero Kanban',
               description: 'Organiza las tareas de tu equipo en columnas. Crea, asigna y mueve tarjetas fácilmente.'
             },
             {
-              icon: '💬',
+              icon: MessagesSquare,
               title: 'Chat de equipo',
               description: 'Comunícate con los miembros de tu grupo en tiempo real sin salir de la plataforma.'
             },
             {
-              icon: '👥',
+              icon: UsersRound,
               title: 'Gestión de grupos',
               description: 'Crea grupos de trabajo, invita miembros y gestiona roles de administrador y miembro.'
             }
@@ -89,7 +89,9 @@ export default function LandingPage() {
               className="rounded-2xl p-6"
               style={{ backgroundColor: 'var(--card)', border: '1px solid var(--border)' }}
             >
-              <div className="text-3xl mb-4">{feature.icon}</div>
+              <div className="mb-4" style={{ color: 'var(--accent)' }}>
+                <feature.icon size={32} strokeWidth={1.5} />
+              </div>
               <h3 className="font-semibold text-lg mb-2" style={{ color: 'var(--foreground)' }}>
                 {feature.title}
               </h3>

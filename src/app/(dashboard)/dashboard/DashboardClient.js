@@ -3,6 +3,7 @@
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import ThemeToggle from '@/components/ui/ThemeToggle'
+import { Hand } from 'lucide-react'
 
 export default function DashboardClient({ user }) {
   return (
@@ -11,7 +12,7 @@ export default function DashboardClient({ user }) {
       <div className="max-w-5xl mx-auto flex items-center justify-between mb-10">
         <div>
           <h1 className="text-3xl font-bold" style={{ color: 'var(--foreground)' }}>
-            Hola, {user.name} 👋
+            Hola, {user.name} <Hand size={24} className="inline-block ml-1" style={{ color: 'var(--accent)' }} />
           </h1>
           <p className="mt-1" style={{ color: 'var(--muted)' }}>{user.email}</p>
         </div>

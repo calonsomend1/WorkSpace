@@ -30,55 +30,57 @@ export default function NewGroupPage() {
       return
     }
 
-    // Redirige al espacio del grupo recién creado
     router.push(`/group/${data.id}`)
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-950">
-      <div className="w-full max-w-md bg-gray-900 rounded-2xl p-8 shadow-xl">
-        <h1 className="text-3xl font-bold text-white mb-2">Nuevo grupo</h1>
-        <p className="text-gray-400 mb-8">Crea un espacio de trabajo para tu equipo</p>
+    <main className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--background)' }}>
+      <div className="w-full max-w-md rounded-2xl p-8 shadow-xl" style={{ backgroundColor: 'var(--card)', border: '1px solid var(--border)' }}>
+        <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--foreground)' }}>Nuevo grupo</h1>
+        <p className="mb-8" style={{ color: 'var(--muted)' }}>Crea un espacio de trabajo para tu equipo</p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-gray-400">Nombre del grupo</label>
+            <label className="text-sm" style={{ color: 'var(--muted)' }}>Nombre del grupo</label>
             <input
               type="text"
               value={name}
               onChange={e => setName(e.target.value)}
-              className="bg-gray-800 text-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-indigo-500"
+              className="rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+              style={{ backgroundColor: 'var(--card-hover)', color: 'var(--foreground)', border: '1px solid var(--border)' }}
               placeholder="Ej: Equipo de diseño"
               required
             />
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-gray-400">Descripción (opcional)</label>
+            <label className="text-sm" style={{ color: 'var(--muted)' }}>Descripción (opcional)</label>
             <textarea
               value={description}
               onChange={e => setDescription(e.target.value)}
-              className="bg-gray-800 text-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+              className="rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-indigo-500 resize-none text-sm"
+              style={{ backgroundColor: 'var(--card-hover)', color: 'var(--foreground)', border: '1px solid var(--border)' }}
               placeholder="¿De qué trata este grupo?"
               rows={3}
             />
           </div>
 
           {error && (
-            <p className="text-red-400 text-sm">{error}</p>
+            <p className="text-sm" style={{ color: 'var(--danger)' }}>{error}</p>
           )}
 
           <button
             type="submit"
             disabled={loading}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg py-3 mt-2 transition-colors disabled:opacity-50"
+            className="text-white font-semibold rounded-lg py-3 mt-2 transition-colors disabled:opacity-50"
+            style={{ backgroundColor: 'var(--accent)' }}
           >
             {loading ? 'Creando...' : 'Crear grupo'}
           </button>
         </form>
 
-        <p className="text-gray-400 text-sm text-center mt-6">
-          <Link href="/dashboard" className="text-indigo-400 hover:text-indigo-300">
+        <p className="text-sm text-center mt-6" style={{ color: 'var(--muted)' }}>
+          <Link href="/dashboard" style={{ color: 'var(--accent)' }}>
             ← Volver al dashboard
           </Link>
         </p>

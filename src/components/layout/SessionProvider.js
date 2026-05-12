@@ -6,7 +6,12 @@ import { ThemeProvider } from 'next-themes'
 export default function AuthSessionProvider({ children }) {
   return (
     <SessionProvider>
-      <ThemeProvider attribute="class" defaultTheme="dark" themes={['dark', 'light']} enableSystem={false}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="dark"
+        themes={['dark', 'light']}
+        enableSystem={false}
+      >
         {children}
       </ThemeProvider>
     </SessionProvider>

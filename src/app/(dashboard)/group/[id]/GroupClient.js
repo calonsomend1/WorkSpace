@@ -155,7 +155,7 @@ export default function GroupClient({ group, currentUser, isAdmin }) {
                 <button
                   onClick={() => setShowDeleteConfirm(true)}
                   className="text-sm px-3 py-1.5 rounded-lg transition-colors"
-                  style={{ backgroundColor: '#3f1515', color: '#fca5a5' }}
+                  style={{ backgroundColor: 'var(--danger-soft-bg)', color: 'var(--danger-soft-text)' }}
                 >
                   Eliminar grupo
                 </button>
@@ -197,7 +197,7 @@ export default function GroupClient({ group, currentUser, isAdmin }) {
               </button>
             </form>
             {inviteMsg && (
-              <p className={`text-sm mt-2 ${inviteMsg.startsWith('✓') ? 'text-green-400' : 'text-red-400'}`}>
+              <p className="text-sm mt-2" style={{ color: inviteMsg.startsWith('✓') ? 'var(--success)' : 'var(--danger)' }}>
                 {inviteMsg}
               </p>
             )}
@@ -235,8 +235,7 @@ export default function GroupClient({ group, currentUser, isAdmin }) {
               <button
                 onClick={handleDeleteGroup}
                 disabled={deleting}
-                className="text-white font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50 flex-1"
-                style={{ backgroundColor: '#dc2626' }}
+                className="text-white font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50 flex-1 bg-[var(--danger)] hover:bg-[var(--danger-hover)]"
               >
                 {deleting ? 'Eliminando...' : 'Sí, eliminar'}
               </button>
@@ -264,8 +263,7 @@ export default function GroupClient({ group, currentUser, isAdmin }) {
               <button
                 onClick={handleLeaveGroup}
                 disabled={leaving}
-                className="text-white font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50 flex-1"
-                style={{ backgroundColor: '#dc2626' }}
+                className="text-white font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50 flex-1 bg-[var(--danger)] hover:bg-[var(--danger-hover)]"
               >
                 {leaving ? 'Saliendo...' : 'Sí, salir'}
               </button>
@@ -331,13 +329,15 @@ export default function GroupClient({ group, currentUser, isAdmin }) {
                         />
                         <button
                           onClick={() => handleSaveLabel(membershipId)}
-                          className="text-xs text-green-400 hover:text-green-300"
+                          className="text-xs hover:opacity-80"
+                          style={{ color: 'var(--success)' }}
                         >
                           ✓
                         </button>
                         <button
                           onClick={() => { setEditingLabel(null); setLabelValue('') }}
-                          className="text-xs text-red-400 hover:text-red-300"
+                          className="text-xs hover:opacity-80"
+                          style={{ color: 'var(--danger)' }}
                         >
                           ✕
                         </button>
@@ -365,8 +365,8 @@ export default function GroupClient({ group, currentUser, isAdmin }) {
                 {isAdmin && role !== 'admin' && (
                   <button
                     onClick={() => handleKickMember(membershipId)}
-                    className="text-xs text-red-400 hover:text-red-300 px-3 py-1.5 rounded-lg transition-colors shrink-0"
-                    style={{ backgroundColor: 'var(--card-hover)' }}
+                    className="text-xs px-3 py-1.5 rounded-lg transition-colors shrink-0 hover:opacity-80"
+                    style={{ color: 'var(--danger)', backgroundColor: 'var(--card-hover)' }}
                   >
                     Expulsar
                   </button>

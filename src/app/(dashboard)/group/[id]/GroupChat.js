@@ -3,12 +3,18 @@
 import { useState, useEffect, useRef } from 'react'
 
 export default function GroupChat({ messages: initialMessages, groupId, currentUser }) {
-  const [messageList, setMessageList] = useState([])
+  const [messageList, setMessageList] = useState(initialMessages || [])
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
   const bottomRef = useRef(null)
+  const messageListRef = useRef(messageList)
 
-  // Carga inicial de mensajes desde la API, no desde props
+  // Sincroniza la ref con el estado actual para que el polling siempre vea los últimos mensajes
+  useEffect(() => {
+    messageListRef.current = messageList
+  }, [messageList])
+
+  // Carga inicial: fetch completo al cargar
   useEffect(() => {
     async function loadMessages() {
       const res = await fetch(`/api/messages?groupId=${groupId}`)
@@ -25,13 +31,18 @@ export default function GroupChat({ messages: initialMessages, groupId, currentU
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messageList])
 
-  // Polling — consulta mensajes nuevos cada 3 segundos
+  // Polling optimizado: solo consulta mensajes nuevos cada 3 segundos
   useEffect(() => {
     const interval = setInterval(async () => {
-      const res = await fetch(`/api/messages?groupId=${groupId}`)
+      const lastMessage = messageListRef.current[messageListRef.current.length - 1]
+      const sinceParam = lastMessage ? `&since=${encodeURIComponent(lastMessage.createdAt)}` : ''
+      const res = await fetch(`/api/messages?groupId=${groupId}${sinceParam}`)
+
       if (res.ok) {
         const data = await res.json()
-        setMessageList(data)
+        if (data.length > 0) {
+          setMessageList(prev => [...prev, ...data])
+        }
       }
     }, 3000)
 
